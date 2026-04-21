@@ -112,6 +112,20 @@ const MOCK_ITEMS: Item[] = [
     claimedByUserId: "mock-user-id",
   },
   {
+    id: "7",
+    name: "Yellow Snapback Cap",
+    category: "clothing",
+    location: "library",
+    dateFound: "2026-04-10",
+    description: "Yellow snapback cap with a university logo. Found on a study desk on the second floor.",
+    status: "Available",
+    imageUrls: ["https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800&h=600&fit=crop"],
+    userId: "mock-user-id",
+    userName: "Demo User",
+    createdAt: "2026-04-10T09:00:00Z",
+    archived: false,
+  },
+  {
     id: "6",
     name: "Black Umbrella",
     category: "accessories",
@@ -189,7 +203,7 @@ const MOCK_OFFERS: Offer[] = [
 let mockItemsStore = [...MOCK_ITEMS];
 let mockNotificationsStore = [...MOCK_NOTIFICATIONS];
 let mockOffersStore = [...MOCK_OFFERS];
-let nextId = 7;
+let nextId = 8;
 let nextNotificationId = 4;
 let nextOfferId = 3;
 
@@ -419,24 +433,16 @@ export const mockApi = {
   simulateDemoUnclaimedNotification: async (): Promise<{ itemId: string; notificationId: string } | null> => {
     await new Promise(resolve => setTimeout(resolve, 300));
 
-    // Find an Available item owned by the current (mock) user that doesn't
-    // already have a real or demo unclaimed_alert notification.
-    const existingAlerts = new Set(
-      mockNotificationsStore
-        .filter(n => n.type === 'unclaimed_alert' && n.userId === 'mock-user-id')
-        .map(n => n.itemId)
+    // Always prefer item "7" (Yellow Snapback Cap) — owned by mock-user-id
+    // so ItemDetails correctly shows the owner-only unclaimed action panel.
+    // Fall back to any other Available item owned by mock-user-id.
+    const preferredItem = mockItemsStore.find(
+      i => i.id === '7' && i.status === 'Available' && !i.archived
     );
-
-    const candidate = mockItemsStore.find(
-      item =>
-        item.userId === 'mock-user-id' &&
-        item.status === 'Available' &&
-        !item.archived &&
-        !existingAlerts.has(item.id)
+    const fallbackItem = mockItemsStore.find(
+      i => i.userId === 'mock-user-id' && i.status === 'Available' && !i.archived
     );
-
-    // If all user items already have alerts, fall back to item "1" by resetting
-    const target = candidate ?? mockItemsStore.find(i => i.id === '1') ?? null;
+    const target = preferredItem ?? fallbackItem ?? null;
     if (!target) return null;
 
     // Set the demo flag on the item so ItemDetails shows the unclaimed panel
