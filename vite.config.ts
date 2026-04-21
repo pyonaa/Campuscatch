@@ -17,6 +17,10 @@ function figmaAssetResolver() {
 }
 
 export default defineConfig({
+  // Vercel sets VERCEL=1 during `vite build` so the client bundle can show demo-only UI.
+  define: {
+    __VERCEL_BUILD__: JSON.stringify(process.env.VERCEL === '1'),
+  },
   plugins: [
     figmaAssetResolver(),
     // The React and Tailwind plugins are both required for Make, even if

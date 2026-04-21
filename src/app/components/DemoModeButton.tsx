@@ -1,7 +1,7 @@
 /**
  * DEMO ONLY — DemoModeButton
  *
- * Visible when Vite dev mode is on, VITE_DEMO_MODE=true, or the host is localhost / 127.0.0.1 / ::1.
+ * Visible when Vite dev mode is on, VITE_DEMO_MODE=true, built on Vercel (VERCEL=1), or host is localhost / 127.0.0.1 / ::1.
  * Injects a simulated "2-month unclaimed" notification for presentation purposes.
  * Does NOT modify any real createdAt dates or real notification logic.
  */
@@ -14,6 +14,7 @@ import { toast } from "sonner";
 const IS_DEMO =
   import.meta.env.DEV === true ||
   import.meta.env.VITE_DEMO_MODE === "true" ||
+  __VERCEL_BUILD__ === true ||
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1" ||
   window.location.hostname === "::1";
