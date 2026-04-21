@@ -2,15 +2,6 @@
 
 CampusCatch is a **campus lost & found** web app: students can post lost or found items, browse listings, message each other, manage their posts, and use a **campus auction** area. The UI was originally designed in Figma as [Campus Lost & Found UI](https://www.figma.com/design/McQ1xmSB5I9ylkb6fdC37w/Campus-Lost---Found-UI).
 
-## Stack
-
-- [React](https://react.dev/) 18 and [TypeScript](https://www.typescriptlang.org/)
-- [Vite](https://vitejs.dev/) 6 for dev server and production builds
-- [React Router](https://reactrouter.com/) 7 for routing
-- [Tailwind CSS](https://tailwindcss.com/) 4 and [shadcn-style](https://ui.shadcn.com/) primitives (Radix UI)
-- [Supabase](https://supabase.com/) for auth, data, storage, and Edge Functions
-- [Sonner](https://sonner.emilkowal.ski/) for toasts
-
 ## Features
 
 - Sign-in and protected routes
@@ -36,6 +27,16 @@ npm run dev
 ```
 
 Then open the URL Vite prints (by default [http://localhost:5173/](http://localhost:5173/)).
+  
+## Stack
+
+- [React](https://react.dev/) 18 and [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/) 6 for dev server and production builds
+- [React Router](https://reactrouter.com/) 7 for routing
+- [Tailwind CSS](https://tailwindcss.com/) 4 and [shadcn-style](https://ui.shadcn.com/) primitives (Radix UI)
+- [Supabase](https://supabase.com/) for auth, data, storage, and Edge Functions
+- [Sonner](https://sonner.emilkowal.ski/) for toasts
+
 
 ## Scripts
 
